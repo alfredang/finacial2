@@ -2,7 +2,7 @@
 
 A one-page marketing site for **Horizon Wealth Planning**, a fictional financial planning firm. It is one self-contained `index.html` with inline CSS and vanilla JavaScript. There are no frameworks and no build step.
 
-**Live site:** _coming soon_
+**Live site:** https://alfredang.github.io/finacial2/
 
 ![Horizon Wealth Planning homepage: navy header with gold accents, a hero headline "Plan Today. Prosper Tomorrow." over a photo of tax paperwork and a calculator, with consultation buttons and stats (15+ years, 1,200+ clients, $500M advised)](docs/screenshot.png)
 
@@ -46,6 +46,8 @@ sed -n '/<script>/,/<\/script>/p' index.html | sed '1d;$d' > "$TEMP/hw.js" && no
 ## Deployment
 
 On every push to `main`, [.github/workflows/pages.yml](.github/workflows/pages.yml) publishes the repo root to GitHub Pages. It can also be triggered manually from the Actions tab.
+
+In a fork or a new copy, turn Pages on once before the first deploy: go to Settings → Pages and set Source to **GitHub Actions**. The workflow's default token can't create the Pages site on its own.
 
 ## Contributing conventions
 
