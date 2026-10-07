@@ -1,0 +1,6 @@
+# Note: crawlers only read robots.txt at the domain root (alfredang.github.io/robots.txt).
+# This copy documents intent and is ready to move to the root if the site gets its own domain.
+User-agent: *
+Allow: /
+
+Sitemap: https://alfredang.github.io/finacial2/v2/sitemap.xml

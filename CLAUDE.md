@@ -6,6 +6,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 One-page marketing site for "Horizon Wealth Planning", a financial planning firm. Everything lives in a single `index.html`: CSS goes in one `<style>` tag and vanilla JS in one `<script>` tag. That is a hard requirement, so don't add frameworks, build tools, package managers or separate CSS/JS files. External resources are limited to Google Fonts (Playfair Display for headings, Inter for body), one Unsplash hero image and pravatar.cc testimonial avatars.
 
+## Two versions
+
+- `index.html` at the repo root is **v1**. It is published at the Pages root and must not be modified. Everything below describes v1 unless noted.
+- `v2/index.html` is **v2**, the friendly/cute redesign served at `/v2/`. It follows the same single-file rules and numbered-section layout, but with its own sections: CSS (1) tokens … (18) print, and JS (0) frame-busting, then (1) nav, (2) count-up, (3) calculator, (4) carousel, (5) email capture + checklist, (6) enquiry form, (7) nudge, (8) footer year, (9) scroll. It uses Fraunces + Nunito and has no pravatar or Unsplash.
+  - v2 has a hash-based meta CSP. **After any change to its inline `<style>` or `<script>`, run `node tools/csp-hash.js`**, or the browser blocks them. Never add inline `style=""` attributes or `on*=` handlers, which the CSP blocks. Setting element styles from JS (`el.style.setProperty`) is fine.
+  - Keep the `FAQPage` JSON-LD in `<head>` word-for-word in sync with the visible FAQ.
+  - Single-field email forms go through `wireEmailCapture()`. Every form has a hidden `website` honeypot input.
+
 ## Commands
 
 There is no build, lint or test setup.
