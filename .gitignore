@@ -6,6 +6,16 @@
 *.p12
 *.pfx
 id_rsa*
+id_ed25519*
+*.keystore
+credentials*.json
+service-account*.json
+*.sqlite
+*.db
+.npmrc
+.pypirc
+*.tfstate
+.claude/settings.local.json
 .playwright-mcp/
 .DS_Store
 Thumbs.db

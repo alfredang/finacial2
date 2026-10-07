@@ -17,7 +17,7 @@ A one-page marketing site for **Horizon Wealth Planning**, a fictional financial
 
 ## Placeholder content
 
-None of this is real. The firm, the hero statistics, the testimonials, the email (`hello@horizonwealth.example`) and the phone number (`+65 6123 4567`) are all placeholders. Avatars come from [pravatar.cc](https://pravatar.cc) and the hero image from Unsplash.
+None of this is real. The firm, the hero statistics, the testimonials, the email (`hello@horizonwealth.example`), the phone number (`+65 6123 4567`) and the office address are all placeholders. Avatars come from [pravatar.cc](https://pravatar.cc) and the hero image from Unsplash.
 
 **The forms do not send anywhere.** On a valid submit the enquiry form logs its data to the browser console and shows a success message. To collect real enquiries, wire the submit handler in the `<script>` (section 5, enquiry form) to a backend or form service.
 
