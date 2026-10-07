@@ -1,0 +1,1884 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Horizon Wealth Planning offers personalised retirement, investment and insurance planning to help you build lasting financial security.">
+  <title>Horizon Wealth Planning | Plan Today. Prosper Tomorrow.</title>
+
+  <!-- Google Fonts: Playfair Display (headings) + Inter (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* =========================================================
+       1. DESIGN TOKENS (CSS custom properties)
+       ========================================================= */
+    :root {
+      /* Colors */
+      --navy: #0B2545;
+      --navy-light: #13315C;
+      --navy-dark: #071A31;
+      --gold: #C9A227;
+      --gold-dark: #A9861A;
+      --gold-light: #F4ECD0;
+      --bg: #F7F9FC;
+      --white: #FFFFFF;
+      --text: #1E2A3B;
+      --muted: #5B6B80;
+      --border: #D6DEE8;
+      --error: #D93025;
+      --success: #1E8E3E;
+
+      /* Typography */
+      --font-heading: "Playfair Display", Georgia, serif;
+      --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+
+      /* Spacing scale */
+      --space-xs: 0.5rem;
+      --space-sm: 1rem;
+      --space-md: 1.5rem;
+      --space-lg: 2.5rem;
+      --space-xl: 4rem;
+      --space-2xl: 6rem;
+
+      /* Misc */
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 10px 30px rgba(11, 37, 69, 0.08);
+      --shadow-hover: 0 18px 40px rgba(11, 37, 69, 0.16);
+      --transition: 0.3s ease;
+      --header-h: 72px;
+      --container: 1200px;
+    }
+
+    /* =========================================================
+       2. RESET & BASE STYLES
+       ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: var(--header-h);
+    }
+
+    body {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      line-height: 1.65;
+      color: var(--text);
+      background: var(--bg);
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-heading);
+      color: var(--navy);
+      line-height: 1.2;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+    button, input, select, textarea { font: inherit; color: inherit; }
+
+    :focus-visible {
+      outline: 3px solid var(--gold);
+      outline-offset: 3px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: var(--container);
+      margin: 0 auto;
+      padding: 0 var(--space-sm);
+    }
+
+    .section { padding: var(--space-xl) 0; }
+
+    .section-header {
+      text-align: center;
+      max-width: 640px;
+      margin: 0 auto var(--space-lg);
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: var(--space-xs);
+    }
+
+    .section-title {
+      font-size: clamp(1.9rem, 4vw, 2.75rem);
+      margin-bottom: var(--space-sm);
+    }
+
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 60px;
+      height: 3px;
+      background: var(--gold);
+      margin: var(--space-sm) auto 0;
+      border-radius: 2px;
+    }
+
+    .section-subtitle { color: var(--muted); }
+
+    .visually-hidden {
+      position: absolute !important;
+      width: 1px; height: 1px;
+      padding: 0; margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    /* =========================================================
+       3. BUTTONS
+       ========================================================= */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-xs);
+      padding: 0.9rem 1.8rem;
+      border-radius: 50px;
+      font-weight: 600;
+      font-size: 1rem;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: transform var(--transition), box-shadow var(--transition),
+                  background-color var(--transition), color var(--transition), border-color var(--transition);
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-gold {
+      background: var(--gold);
+      color: var(--navy);
+    }
+    .btn-gold:hover {
+      background: var(--gold-dark);
+      color: var(--white);
+      box-shadow: 0 10px 25px rgba(201, 162, 39, 0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      border-color: var(--white);
+    }
+    .btn-outline:hover {
+      background: var(--white);
+      color: var(--navy);
+    }
+
+    .btn:disabled { opacity: 0.8; cursor: not-allowed; transform: none; }
+
+    /* =========================================================
+       4. HEADER & NAVIGATION
+       ========================================================= */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: var(--navy);
+      transition: box-shadow var(--transition), background-color var(--transition);
+    }
+
+    .site-header.scrolled {
+      background: rgba(11, 37, 69, 0.97);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav {
+      height: var(--header-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-heading);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .logo-mark {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+    }
+
+    .logo span { color: var(--gold); }
+
+    /* Hamburger toggle (mobile) */
+    .nav-toggle {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      width: 44px;
+      height: 44px;
+      padding: 10px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .nav-toggle .bar {
+      display: block;
+      width: 100%;
+      height: 2px;
+      background: var(--white);
+      border-radius: 2px;
+      transition: transform var(--transition), opacity var(--transition);
+    }
+
+    .nav-toggle[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+    .nav-toggle[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile dropdown menu */
+    .nav-menu {
+      position: absolute;
+      top: var(--header-h);
+      left: 0;
+      right: 0;
+      background: var(--navy);
+      padding: 0 var(--space-sm);
+      max-height: 0;
+      overflow: hidden;
+      visibility: hidden;
+      transition: max-height 0.35s ease, padding 0.35s ease, visibility 0.35s;
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .nav-menu.open {
+      max-height: 300px;
+      padding: var(--space-xs) var(--space-sm) var(--space-sm);
+      visibility: visible;
+    }
+
+    .nav-menu a {
+      display: block;
+      padding: 0.85rem 0;
+      color: rgba(255, 255, 255, 0.85);
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      transition: color var(--transition);
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active { color: var(--gold); }
+
+    /* =========================================================
+       5. HERO SECTION
+       ========================================================= */
+    .hero {
+      position: relative;
+      min-height: calc(100vh - var(--header-h));
+      min-height: calc(100svh - var(--header-h));
+      display: flex;
+      align-items: center;
+      padding: var(--space-xl) 0;
+      color: var(--white);
+      background:
+        linear-gradient(135deg, rgba(11, 37, 69, 0.95) 0%, rgba(11, 37, 69, 0.8) 55%, rgba(19, 49, 92, 0.6) 100%),
+        url("https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&w=1920&q=80") center / cover no-repeat;
+    }
+
+    .hero-content { max-width: 760px; }
+
+    .hero h1 {
+      color: var(--white);
+      font-size: clamp(2.4rem, 7vw, 4.25rem);
+      margin-bottom: var(--space-md);
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: clamp(1.05rem, 2.2vw, 1.25rem);
+      color: rgba(255, 255, 255, 0.85);
+      max-width: 600px;
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xl);
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+      padding-top: var(--space-lg);
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .stat-number {
+      display: block;
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 5vw, 2.75rem);
+      font-weight: 700;
+      color: var(--gold);
+      line-height: 1.1;
+    }
+
+    .stat-label {
+      font-size: 0.95rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* =========================================================
+       6. TESTIMONIALS CAROUSEL
+       ========================================================= */
+    .testimonials { background: var(--white); }
+
+    .carousel {
+      --per-view: 1;
+      position: relative;
+    }
+
+    .carousel-viewport {
+      overflow: hidden;
+      margin: 0 calc(var(--space-xs) * -1);
+      touch-action: pan-y;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+      will-change: transform;
+    }
+
+    .carousel-slide {
+      flex: 0 0 calc(100% / var(--per-view));
+      padding: var(--space-sm) var(--space-xs) var(--space-md);
+    }
+
+    .testimonial-card {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: var(--space-lg) var(--space-md);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-hover);
+      border-color: var(--gold);
+    }
+
+    .stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: var(--space-sm);
+    }
+
+    .stars svg { width: 20px; height: 20px; fill: var(--gold); }
+
+    .testimonial-card blockquote {
+      flex: 1;
+      font-size: 1rem;
+      color: var(--text);
+      margin-bottom: var(--space-md);
+      position: relative;
+    }
+
+    .testimonial-card blockquote::before {
+      content: "\201C";
+      font-family: var(--font-heading);
+      font-size: 3.5rem;
+      line-height: 0;
+      color: var(--gold);
+      opacity: 0.35;
+      position: relative;
+      top: 1.1rem;
+      margin-right: 4px;
+    }
+
+    .client {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      padding-top: var(--space-sm);
+      border-top: 1px solid var(--border);
+    }
+
+    .client img {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--gold);
+      background: var(--border);
+    }
+
+    .client-name {
+      font-weight: 600;
+      color: var(--navy);
+      font-style: normal;
+    }
+
+    .client-role {
+      font-size: 0.875rem;
+      color: var(--muted);
+    }
+
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--space-md);
+      margin-top: var(--space-md);
+    }
+
+    .carousel-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 2px solid var(--navy);
+      background: transparent;
+      color: var(--navy);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      transition: background-color var(--transition), color var(--transition), transform var(--transition);
+    }
+
+    .carousel-btn:hover {
+      background: var(--navy);
+      color: var(--white);
+      transform: scale(1.06);
+    }
+
+    .carousel-btn svg { width: 20px; height: 20px; }
+
+    .carousel-dots {
+      display: flex;
+      gap: 0.6rem;
+    }
+
+    .carousel-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      border: none;
+      background: var(--border);
+      cursor: pointer;
+      padding: 0;
+      transition: background-color var(--transition), width var(--transition);
+    }
+
+    .carousel-dot:hover { background: var(--gold-dark); }
+
+    .carousel-dot[aria-current="true"] {
+      background: var(--gold);
+      width: 30px;
+      border-radius: 6px;
+    }
+
+    /* =========================================================
+       7. ENQUIRY / CONTACT SECTION
+       ========================================================= */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+
+    .contact-info {
+      background: var(--navy);
+      color: var(--white);
+      border-radius: var(--radius);
+      padding: var(--space-lg) var(--space-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-info::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      border: 30px solid rgba(201, 162, 39, 0.12);
+      right: -80px;
+      bottom: -80px;
+    }
+
+    .contact-info h3 {
+      color: var(--white);
+      font-size: 1.6rem;
+      margin-bottom: var(--space-xs);
+    }
+
+    .contact-info > p {
+      color: rgba(255, 255, 255, 0.75);
+      margin-bottom: var(--space-lg);
+    }
+
+    .info-list { display: grid; gap: var(--space-md); }
+
+    .info-item {
+      display: flex;
+      gap: var(--space-sm);
+      align-items: flex-start;
+    }
+
+    .info-icon {
+      flex-shrink: 0;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(201, 162, 39, 0.15);
+      display: grid;
+      place-items: center;
+      color: var(--gold);
+    }
+
+    .info-icon svg { width: 22px; height: 22px; }
+
+    .info-item h4 {
+      font-family: var(--font-body);
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 2px;
+    }
+
+    .info-item p,
+    .info-item a { color: rgba(255, 255, 255, 0.9); }
+
+    .info-item a:hover { color: var(--gold); }
+
+    .form-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: var(--space-lg) var(--space-md);
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-md);
+    }
+
+    .form-group { display: flex; flex-direction: column; }
+
+    .form-group label,
+    .form-group legend {
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--navy);
+      margin-bottom: 0.4rem;
+    }
+
+    .required { color: var(--error); }
+
+    .form-control {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--bg);
+      transition: border-color var(--transition), box-shadow var(--transition), background-color var(--transition);
+    }
+
+    .form-control:hover { border-color: #B5C2D3; }
+
+    .form-control:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: var(--white);
+      box-shadow: 0 0 0 4px rgba(201, 162, 39, 0.18);
+    }
+
+    select.form-control {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230B2545' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 0.9rem center;
+      background-size: 18px;
+      padding-right: 2.5rem;
+      cursor: pointer;
+    }
+
+    textarea.form-control { resize: vertical; min-height: 130px; }
+
+    fieldset.form-group { border: none; }
+
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs) var(--space-md);
+    }
+
+    .radio-option,
+    .checkbox-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      font-weight: 400 !important;
+      color: var(--text) !important;
+      margin-bottom: 0 !important;
+    }
+
+    .radio-option input,
+    .checkbox-option input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--navy);
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .checkbox-option { align-items: flex-start; font-size: 0.9rem; }
+    .checkbox-option input { margin-top: 3px; }
+
+    /* Validation states */
+    .form-control.invalid {
+      border-color: var(--error);
+      background: #FFF6F5;
+    }
+
+    .form-control.invalid:focus { box-shadow: 0 0 0 4px rgba(217, 48, 37, 0.15); }
+
+    .radio-group.invalid,
+    .checkbox-option.invalid {
+      outline: 1.5px solid var(--error);
+      outline-offset: 6px;
+      border-radius: 4px;
+    }
+
+    .error-msg {
+      min-height: 1.2em;
+      font-size: 0.82rem;
+      color: var(--error);
+      margin-top: 0.3rem;
+    }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: var(--space-xs);
+      border-radius: var(--radius-sm);
+    }
+
+    .spinner {
+      display: none;
+      width: 20px;
+      height: 20px;
+      border: 3px solid rgba(11, 37, 69, 0.25);
+      border-top-color: var(--navy);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .btn-submit.loading .spinner { display: inline-block; }
+    .btn-submit.loading:hover { background: var(--gold); color: var(--navy); }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* Success message */
+    .form-success {
+      text-align: center;
+      padding: var(--space-lg) var(--space-sm);
+      animation: popIn 0.5s ease;
+    }
+
+    .form-success[hidden] { display: none; }
+
+    .success-icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto var(--space-md);
+      border-radius: 50%;
+      background: var(--gold-light);
+      color: var(--gold-dark);
+      display: grid;
+      place-items: center;
+    }
+
+    .success-icon svg { width: 40px; height: 40px; }
+
+    .form-success h3 { font-size: 1.75rem; margin-bottom: var(--space-sm); }
+    .form-success p { color: var(--muted); max-width: 420px; margin: 0 auto; }
+
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.92); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    /* =========================================================
+       8. FOOTER
+       ========================================================= */
+    .site-footer {
+      background: var(--navy);
+      color: rgba(255, 255, 255, 0.75);
+      padding-top: var(--space-xl);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+      padding-bottom: var(--space-lg);
+    }
+
+    .footer-col h3 {
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--white);
+      margin-bottom: var(--space-sm);
+    }
+
+    .footer-about p {
+      margin: var(--space-sm) 0 var(--space-md);
+      font-size: 0.95rem;
+    }
+
+    .footer-links li { margin-bottom: 0.6rem; }
+
+    .footer-links a {
+      position: relative;
+      transition: color var(--transition), padding-left var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--gold);
+      padding-left: 6px;
+    }
+
+    .footer-services li {
+      margin-bottom: 0.6rem;
+      font-size: 0.95rem;
+    }
+
+    .socials { display: flex; gap: 0.75rem; }
+
+    .socials a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: grid;
+      place-items: center;
+      color: var(--white);
+      transition: background-color var(--transition), border-color var(--transition), color var(--transition), transform var(--transition);
+    }
+
+    .socials a:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--navy);
+      transform: translateY(-3px);
+    }
+
+    .socials svg { width: 18px; height: 18px; fill: currentColor; }
+
+    .newsletter p { font-size: 0.95rem; margin-bottom: var(--space-sm); }
+
+    .newsletter-form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .newsletter-form input {
+      width: 100%;
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-sm);
+      border: 1.5px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--white);
+      transition: border-color var(--transition);
+    }
+
+    .newsletter-form input::placeholder { color: rgba(255, 255, 255, 0.5); }
+    .newsletter-form input:focus { outline: none; border-color: var(--gold); }
+    .newsletter-form input.invalid { border-color: #FF6B5E; }
+
+    .newsletter-form .btn { border-radius: var(--radius-sm); }
+
+    .newsletter-msg {
+      min-height: 1.2em;
+      font-size: 0.85rem;
+    }
+
+    .newsletter-msg.error { color: #FF8A80; }
+    .newsletter-msg.success { color: var(--gold); }
+
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding: var(--space-md) 0;
+      text-align: center;
+      font-size: 0.85rem;
+    }
+
+    .footer-bottom .disclaimer {
+      margin-top: 0.4rem;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    /* =========================================================
+       9. BACK TO TOP BUTTON
+       ========================================================= */
+    .back-to-top {
+      position: fixed;
+      right: var(--space-sm);
+      bottom: var(--space-sm);
+      z-index: 900;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      border: none;
+      background: var(--gold);
+      color: var(--navy);
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: opacity var(--transition), visibility var(--transition), transform var(--transition), background-color var(--transition);
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover { background: var(--gold-dark); color: var(--white); }
+    .back-to-top svg { width: 22px; height: 22px; }
+
+    /* =========================================================
+       10. SCROLL ANIMATIONS
+       ========================================================= */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .delay-1 { transition-delay: 0.15s; }
+    .delay-2 { transition-delay: 0.3s; }
+    .delay-3 { transition-delay: 0.45s; }
+
+    /* =========================================================
+       11. RESPONSIVE — TABLET (min-width: 768px)
+       ========================================================= */
+    @media (min-width: 768px) {
+      .container { padding: 0 var(--space-lg); }
+      .section { padding: var(--space-2xl) 0; }
+
+      /* Desktop-style inline nav */
+      .nav-toggle { display: none; }
+
+      .nav-menu {
+        position: static;
+        display: flex;
+        gap: var(--space-lg);
+        max-height: none;
+        overflow: visible;
+        visibility: visible;
+        padding: 0;
+        background: none;
+        box-shadow: none;
+      }
+
+      .nav-menu a {
+        padding: 0.4rem 0;
+        border-bottom: none;
+        position: relative;
+      }
+
+      .nav-menu a::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 0;
+        height: 2px;
+        background: var(--gold);
+        transition: width var(--transition);
+      }
+
+      .nav-menu a:hover::after,
+      .nav-menu a.active::after { width: 100%; }
+
+      .hero-actions { flex-direction: row; }
+      .stats { grid-template-columns: repeat(3, 1fr); }
+
+      .form-grid { grid-template-columns: 1fr 1fr; }
+      .form-group.full { grid-column: 1 / -1; }
+
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+
+      .newsletter-form { flex-direction: row; flex-wrap: wrap; }
+      .newsletter-form input { flex: 1 1 180px; width: auto; }
+      .newsletter-msg { flex-basis: 100%; }
+
+      .back-to-top { right: var(--space-md); bottom: var(--space-md); }
+    }
+
+    /* =========================================================
+       12. RESPONSIVE — DESKTOP (min-width: 1024px)
+       ========================================================= */
+    @media (min-width: 1024px) {
+      .contact-grid {
+        grid-template-columns: 5fr 7fr;
+        align-items: start;
+      }
+
+      .contact-info,
+      .form-card { padding: var(--space-xl) var(--space-lg); }
+
+      .footer-grid { grid-template-columns: 1.4fr 1fr 1fr 1.4fr; }
+    }
+
+    /* =========================================================
+       13. REDUCED MOTION
+       ========================================================= */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
+      }
+      .fade-in { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================
+       HEADER / STICKY NAVIGATION
+       ========================================================= -->
+  <header class="site-header" id="site-header">
+    <nav class="nav container" aria-label="Primary">
+      <a href="#home" class="logo" aria-label="Horizon Wealth Planning — home">
+        <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+          <circle cx="20" cy="20" r="19" fill="none" stroke="#C9A227" stroke-width="2"/>
+          <path d="M8 26h24" stroke="#C9A227" stroke-width="2" stroke-linecap="round"/>
+          <path d="M12 26a8 8 0 0 1 16 0" fill="#C9A227"/>
+          <path d="M20 9v4M11 13l2.5 2.5M29 13l-2.5 2.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Horizon <span>Wealth</span>
+      </a>
+
+      <button class="nav-toggle" id="nav-toggle" type="button"
+              aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#home" class="active">Home</a></li>
+        <li><a href="#testimonials">Testimonials</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+
+    <!-- =========================================================
+         1. HERO SECTION
+         ========================================================= -->
+    <section class="hero" id="home" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero-content">
+          <span class="eyebrow fade-in" style="color: var(--gold);">Independent Financial Planning</span>
+          <h1 id="hero-title" class="fade-in delay-1">Plan Today. <em>Prosper Tomorrow.</em></h1>
+          <p class="hero-sub fade-in delay-2">
+            We build personalised retirement, investment and insurance plans that grow with you,
+            so you can face every stage of life with clarity and confidence.
+          </p>
+          <div class="hero-actions fade-in delay-3">
+            <a href="#contact" class="btn btn-gold">Book a Free Consultation</a>
+            <a href="#testimonials" class="btn btn-outline">Learn More</a>
+          </div>
+        </div>
+
+        <!-- Trust stats (animated count-up) -->
+        <ul class="stats fade-in" aria-label="Firm highlights">
+          <li class="stat">
+            <span class="stat-number" data-target="15" data-suffix="+">0+</span>
+            <span class="stat-label">Years Experience</span>
+          </li>
+          <li class="stat">
+            <span class="stat-number" data-target="1200" data-suffix="+">0+</span>
+            <span class="stat-label">Clients</span>
+          </li>
+          <li class="stat">
+            <span class="stat-number" data-target="500" data-prefix="$" data-suffix="M">$0M</span>
+            <span class="stat-label">Assets Advised</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         2. TESTIMONIALS SECTION (carousel)
+         ========================================================= -->
+    <section class="section testimonials" id="testimonials" aria-labelledby="testimonials-title">
+      <div class="container">
+        <header class="section-header fade-in">
+          <span class="eyebrow">Testimonials</span>
+          <h2 class="section-title" id="testimonials-title">What Our Clients Say</h2>
+          <p class="section-subtitle">Real stories from families and professionals who trust us with their financial future.</p>
+        </header>
+
+        <div class="carousel fade-in" id="carousel"
+             role="region" aria-roledescription="carousel" aria-label="Client testimonials">
+          <div class="carousel-viewport">
+            <div class="carousel-track" id="carousel-track" aria-live="off">
+
+              <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="1 of 6">
+                <div class="testimonial-card">
+                  <div class="stars" role="img" aria-label="5 out of 5 stars"></div>
+                  <blockquote>Horizon turned our vague retirement hopes into a clear, step-by-step plan. For the first time, we know exactly when we can stop working and what our income will look like.</blockquote>
+                  <div class="client">
+                    <img src="https://i.pravatar.cc/120?img=12" alt="Portrait of David Tan" width="56" height="56" loading="lazy">
+                    <div>
+                      <p class="client-name">David Tan</p>
+                      <p class="client-role">Engineering Manager</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="2 of 6">
+                <div class="testimonial-card">
+                  <div class="stars" role="img" aria-label="5 out of 5 stars"></div>
+                  <blockquote>As a business owner, my finances are complicated. My adviser untangled everything, from tax to insurance, and explained it all without any jargon. Highly recommended.</blockquote>
+                  <div class="client">
+                    <img src="https://i.pravatar.cc/120?img=47" alt="Portrait of Sarah Lim" width="56" height="56" loading="lazy">
+                    <div>
+                      <p class="client-name">Sarah Lim</p>
+                      <p class="client-role">Small Business Owner</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="3 of 6">
+                <div class="testimonial-card">
+                  <div class="stars" role="img" aria-label="5 out of 5 stars"></div>
+                  <blockquote>They never pushed a product on us. Every recommendation came with a clear reason, and our portfolio reviews are honest and easy to follow.</blockquote>
+                  <div class="client">
+                    <img src="https://i.pravatar.cc/120?img=33" alt="Portrait of Michael Wong" width="56" height="56" loading="lazy">
+                    <div>
+                      <p class="client-name">Michael Wong</p>
+                      <p class="client-role">Medical Doctor</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="4 of 6">
+                <div class="testimonial-card">
+                  <div class="stars" role="img" aria-label="5 out of 5 stars"></div>
+                  <blockquote>After my husband passed, I felt lost with our finances. The team was patient and kind, and helped me sort out the estate and set up a plan I'm comfortable with.</blockquote>
+                  <div class="client">
+                    <img src="https://i.pravatar.cc/120?img=45" alt="Portrait of Margaret Ng" width="56" height="56" loading="lazy">
+                    <div>
+                      <p class="client-name">Margaret Ng</p>
+                      <p class="client-role">Retired Teacher</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="5 of 6">
+                <div class="testimonial-card">
+                  <div class="stars" role="img" aria-label="5 out of 5 stars"></div>
+                  <blockquote>We started with a simple question about saving for our kids' education and came away with a full family plan. The quarterly check-ins keep us on track.</blockquote>
+                  <div class="client">
+                    <img src="https://i.pravatar.cc/120?img=15" alt="Portrait of Ravi Kumar" width="56" height="56" loading="lazy">
+                    <div>
+                      <p class="client-name">Ravi Kumar</p>
+                      <p class="client-role">Marketing Director</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+              <article class="carousel-slide" role="group" aria-roledescription="slide" aria-label="6 of 6">
+                <div class="testimonial-card">
+                  <div class="stars" role="img" aria-label="5 out of 5 stars"></div>
+                  <blockquote>Young professionals often get overlooked, but Horizon took my goals seriously. I now invest every month with a strategy I actually understand.</blockquote>
+                  <div class="client">
+                    <img src="https://i.pravatar.cc/120?img=44" alt="Portrait of Emily Chen" width="56" height="56" loading="lazy">
+                    <div>
+                      <p class="client-name">Emily Chen</p>
+                      <p class="client-role">UX Designer</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+
+            </div>
+          </div>
+
+          <div class="carousel-controls">
+            <button class="carousel-btn" id="carousel-prev" type="button" aria-label="Previous testimonial" aria-controls="carousel-track">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <div class="carousel-dots" id="carousel-dots" role="group" aria-label="Choose testimonial"></div>
+            <button class="carousel-btn" id="carousel-next" type="button" aria-label="Next testimonial" aria-controls="carousel-track">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================================================
+         3. ENQUIRY FORM / CONTACT SECTION
+         ========================================================= -->
+    <section class="section" id="contact" aria-labelledby="contact-title">
+      <div class="container">
+        <header class="section-header fade-in">
+          <span class="eyebrow">Get In Touch</span>
+          <h2 class="section-title" id="contact-title">Start Your Financial Journey</h2>
+          <p class="section-subtitle">Tell us a little about yourself and a planner will reach out within one business day.</p>
+        </header>
+
+        <div class="contact-grid">
+
+          <!-- Contact information -->
+          <aside class="contact-info fade-in" aria-label="Contact information">
+            <h3>Let's Talk</h3>
+            <p>Your first consultation is free and comes with no obligation.</p>
+
+            <ul class="info-list">
+              <li class="info-item">
+                <span class="info-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </span>
+                <div>
+                  <h4>Address</h4>
+                  <p>88 Market Street, Level 21<br>Financial District, 048948</p>
+                </div>
+              </li>
+              <li class="info-item">
+                <span class="info-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                </span>
+                <div>
+                  <h4>Phone</h4>
+                  <p><a href="tel:+6561234567">+65 6123 4567</a></p>
+                </div>
+              </li>
+              <li class="info-item">
+                <span class="info-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 6l-10 7L2 6"/></svg>
+                </span>
+                <div>
+                  <h4>Email</h4>
+                  <p><a href="mailto:hello@horizonwealth.example">hello@horizonwealth.example</a></p>
+                </div>
+              </li>
+              <li class="info-item">
+                <span class="info-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                </span>
+                <div>
+                  <h4>Office Hours</h4>
+                  <p>Mon – Fri: 9:00am – 6:00pm<br>Sat: 10:00am – 2:00pm (by appointment)</p>
+                </div>
+              </li>
+            </ul>
+          </aside>
+
+          <!-- Enquiry form -->
+          <div class="form-card fade-in delay-1">
+            <form id="enquiry-form" novalidate aria-label="Enquiry form">
+              <div class="form-grid">
+
+                <div class="form-group full">
+                  <label for="fullName">Full Name <span class="required" aria-hidden="true">*</span></label>
+                  <input class="form-control" type="text" id="fullName" name="fullName" autocomplete="name"
+                         placeholder="e.g. Jane Tan" required aria-required="true" aria-describedby="fullName-error">
+                  <span class="error-msg" id="fullName-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="email">Email <span class="required" aria-hidden="true">*</span></label>
+                  <input class="form-control" type="email" id="email" name="email" autocomplete="email"
+                         placeholder="you@example.com" required aria-required="true" aria-describedby="email-error">
+                  <span class="error-msg" id="email-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="phone">Phone <span class="required" aria-hidden="true">*</span></label>
+                  <input class="form-control" type="tel" id="phone" name="phone" autocomplete="tel" inputmode="numeric"
+                         placeholder="Digits only, e.g. 91234567" required aria-required="true" aria-describedby="phone-error">
+                  <span class="error-msg" id="phone-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="ageRange">Age Range <span class="required" aria-hidden="true">*</span></label>
+                  <select class="form-control" id="ageRange" name="ageRange" required aria-required="true" aria-describedby="ageRange-error">
+                    <option value="">Select your age range</option>
+                    <option value="18-24">18 – 24</option>
+                    <option value="25-34">25 – 34</option>
+                    <option value="35-44">35 – 44</option>
+                    <option value="45-54">45 – 54</option>
+                    <option value="55-64">55 – 64</option>
+                    <option value="65+">65+</option>
+                  </select>
+                  <span class="error-msg" id="ageRange-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group">
+                  <label for="interest">Area of Interest <span class="required" aria-hidden="true">*</span></label>
+                  <select class="form-control" id="interest" name="interest" required aria-required="true" aria-describedby="interest-error">
+                    <option value="">Select an area</option>
+                    <option>Retirement Planning</option>
+                    <option>Investment</option>
+                    <option>Insurance</option>
+                    <option>Estate Planning</option>
+                    <option>Tax Planning</option>
+                  </select>
+                  <span class="error-msg" id="interest-error" aria-live="polite"></span>
+                </div>
+
+                <fieldset class="form-group full" aria-describedby="contactMethod-error">
+                  <legend>Preferred Contact Method <span class="required" aria-hidden="true">*</span></legend>
+                  <div class="radio-group" id="contactMethod-group">
+                    <label class="radio-option"><input type="radio" name="contactMethod" value="Email" required> Email</label>
+                    <label class="radio-option"><input type="radio" name="contactMethod" value="Phone"> Phone</label>
+                    <label class="radio-option"><input type="radio" name="contactMethod" value="WhatsApp"> WhatsApp</label>
+                  </div>
+                  <span class="error-msg" id="contactMethod-error" aria-live="polite"></span>
+                </fieldset>
+
+                <div class="form-group full">
+                  <label for="message">Message <span class="required" aria-hidden="true">*</span></label>
+                  <textarea class="form-control" id="message" name="message" rows="5"
+                            placeholder="Tell us about your goals or questions…" required aria-required="true" aria-describedby="message-error"></textarea>
+                  <span class="error-msg" id="message-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group full">
+                  <label class="checkbox-option" id="consent-label">
+                    <input type="checkbox" id="consent" name="consent" required aria-required="true" aria-describedby="consent-error">
+                    <span>I agree to be contacted by Horizon Wealth Planning about my enquiry and understand my details will be handled in line with the privacy policy. <span class="required" aria-hidden="true">*</span></span>
+                  </label>
+                  <span class="error-msg" id="consent-error" aria-live="polite"></span>
+                </div>
+
+                <div class="form-group full">
+                  <button type="submit" class="btn btn-gold btn-submit" id="submit-btn">
+                    <span class="spinner" aria-hidden="true"></span>
+                    <span class="btn-label">Send Enquiry</span>
+                  </button>
+                </div>
+
+              </div>
+            </form>
+
+            <!-- Success message (shown after valid submit) -->
+            <div class="form-success" id="form-success" role="status" aria-live="polite" tabindex="-1" hidden>
+              <div class="success-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+              </div>
+              <h3>Thank you, <span id="success-name"></span>!</h3>
+              <p>Your enquiry has been received. One of our planners will be in touch within one business day.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- =========================================================
+       4. FOOTER
+       ========================================================= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+
+        <!-- Column 1: Logo, description, socials -->
+        <div class="footer-col footer-about">
+          <a href="#home" class="logo" aria-label="Horizon Wealth Planning — back to top">
+            <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true">
+              <circle cx="20" cy="20" r="19" fill="none" stroke="#C9A227" stroke-width="2"/>
+              <path d="M8 26h24" stroke="#C9A227" stroke-width="2" stroke-linecap="round"/>
+              <path d="M12 26a8 8 0 0 1 16 0" fill="#C9A227"/>
+              <path d="M20 9v4M11 13l2.5 2.5M29 13l-2.5 2.5" stroke="#FFFFFF" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            Horizon <span>Wealth</span>
+          </a>
+          <p>Independent financial planners helping individuals and families build, protect and pass on wealth with confidence since 2010.</p>
+
+          <ul class="socials" aria-label="Social media">
+            <li>
+              <a href="#" aria-label="Facebook">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.49-3.89 3.78-3.89 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56V12h2.78l-.44 2.89h-2.34v6.99A10 10 0 0 0 22 12z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="Instagram">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.42.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.42.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.42-.36-1.06-.41-2.23C2.17 15.58 2.16 15.2 2.16 12s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.42-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16zM12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38A5.88 5.88 0 0 0 .63 4.14C.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13a5.88 5.88 0 0 0 2.13 1.38c.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56a5.88 5.88 0 0 0 2.13-1.38 5.88 5.88 0 0 0 1.38-2.13c.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63C19.1.33 18.22.13 16.95.07 15.67.01 15.26 0 12 0zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.41-11.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88z"/></svg>
+              </a>
+            </li>
+            <li>
+              <a href="#" aria-label="X (formerly Twitter)">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.65l-5.21-6.82-5.97 6.82H1.68l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Column 2: Quick links -->
+        <nav class="footer-col" aria-label="Footer quick links">
+          <h3>Quick Links</h3>
+          <ul class="footer-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#testimonials">Testimonials</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#contact">Book a Consultation</a></li>
+          </ul>
+        </nav>
+
+        <!-- Column 3: Services -->
+        <div class="footer-col">
+          <h3>Services</h3>
+          <ul class="footer-services">
+            <li>Retirement Planning</li>
+            <li>Investment Management</li>
+            <li>Insurance Planning</li>
+            <li>Estate Planning</li>
+            <li>Tax Planning</li>
+          </ul>
+        </div>
+
+        <!-- Column 4: Newsletter -->
+        <div class="footer-col newsletter">
+          <h3>Newsletter</h3>
+          <p>Monthly market insights and planning tips, straight to your inbox.</p>
+          <form class="newsletter-form" id="newsletter-form" novalidate>
+            <label for="newsletter-email" class="visually-hidden">Email address</label>
+            <input type="email" id="newsletter-email" name="newsletterEmail" placeholder="Your email address"
+                   autocomplete="email" aria-describedby="newsletter-msg">
+            <button type="submit" class="btn btn-gold">Subscribe</button>
+            <p class="newsletter-msg" id="newsletter-msg" aria-live="polite"></p>
+          </form>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; <span id="year"></span> Horizon Wealth Planning. All rights reserved.</p>
+        <p class="disclaimer">This website is for informational purposes only and does not constitute financial advice.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top button -->
+  <button class="back-to-top" id="back-to-top" type="button" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      "use strict";
+
+      const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      /* =========================================================
+         1. NAVIGATION (hamburger toggle, scrolled state, active link)
+         ========================================================= */
+      const header = document.getElementById("site-header");
+      const navToggle = document.getElementById("nav-toggle");
+      const navMenu = document.getElementById("nav-menu");
+      const navLinks = navMenu.querySelectorAll("a");
+
+      function setMenu(open) {
+        navMenu.classList.toggle("open", open);
+        navToggle.setAttribute("aria-expanded", String(open));
+        navToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      }
+
+      navToggle.addEventListener("click", () => {
+        setMenu(navToggle.getAttribute("aria-expanded") !== "true");
+      });
+
+      navLinks.forEach((link) => link.addEventListener("click", () => setMenu(false)));
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && navMenu.classList.contains("open")) {
+          setMenu(false);
+          navToggle.focus();
+        }
+      });
+
+      // Highlight the nav link for the section currently in view
+      const sections = document.querySelectorAll("main section[id]");
+      const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            navLinks.forEach((link) => {
+              link.classList.toggle("active", link.getAttribute("href") === "#" + entry.target.id);
+            });
+          }
+        });
+      }, { rootMargin: "-45% 0px -50% 0px" });
+      sections.forEach((s) => sectionObserver.observe(s));
+
+      /* =========================================================
+         2. FADE-IN ON SCROLL (IntersectionObserver)
+         ========================================================= */
+      const fadeEls = document.querySelectorAll(".fade-in");
+      const fadeObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15 });
+      fadeEls.forEach((el) => fadeObserver.observe(el));
+
+      /* =========================================================
+         3. ANIMATED COUNT-UP STATS
+         ========================================================= */
+      const statNumbers = document.querySelectorAll(".stat-number");
+
+      function formatStat(el, value) {
+        const prefix = el.dataset.prefix || "";
+        const suffix = el.dataset.suffix || "";
+        return prefix + value.toLocaleString("en-US") + suffix;
+      }
+
+      function animateCount(el) {
+        const target = parseInt(el.dataset.target, 10);
+        const duration = 2000;
+        if (prefersReducedMotion) {
+          el.textContent = formatStat(el, target);
+          return;
+        }
+        const start = performance.now();
+        const easeOutQuad = (t) => t * (2 - t);
+
+        function step(now) {
+          const progress = Math.min((now - start) / duration, 1);
+          el.textContent = formatStat(el, Math.round(easeOutQuad(progress) * target));
+          if (progress < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+
+      const statObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateCount(entry.target);
+            obs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.6 });
+      statNumbers.forEach((el) => statObserver.observe(el));
+
+      /* =========================================================
+         4. TESTIMONIAL CAROUSEL
+         ========================================================= */
+      const carousel = document.getElementById("carousel");
+      const track = document.getElementById("carousel-track");
+      const slides = Array.from(track.children);
+      const prevBtn = document.getElementById("carousel-prev");
+      const nextBtn = document.getElementById("carousel-next");
+      const dotsWrap = document.getElementById("carousel-dots");
+      const AUTOPLAY_MS = 5000;
+      const starSvg = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+
+      // Render 5 stars into each rating container
+      carousel.querySelectorAll(".stars").forEach((el) => { el.innerHTML = starSvg.repeat(5); });
+
+      let perView = 1;
+      let index = 0;
+      let timer = null;
+
+      const getPerView = () => (window.innerWidth >= 1024 ? 3 : 1);
+      const maxIndex = () => Math.max(slides.length - perView, 0);
+
+      function buildDots() {
+        dotsWrap.innerHTML = "";
+        for (let i = 0; i <= maxIndex(); i++) {
+          const dot = document.createElement("button");
+          dot.type = "button";
+          dot.className = "carousel-dot";
+          dot.setAttribute("aria-label", "Go to testimonial " + (i + 1));
+          dot.addEventListener("click", () => { goTo(i); restartAutoplay(); });
+          dotsWrap.appendChild(dot);
+        }
+      }
+
+      function update() {
+        track.style.transform = "translateX(-" + (index * 100) / perView + "%)";
+
+        // Hide off-screen slides from assistive tech and keyboard focus
+        slides.forEach((slide, i) => {
+          const visible = i >= index && i < index + perView;
+          slide.setAttribute("aria-hidden", String(!visible));
+          if ("inert" in slide) slide.inert = !visible;
+        });
+
+        Array.from(dotsWrap.children).forEach((dot, i) => {
+          dot.setAttribute("aria-current", String(i === index));
+        });
+      }
+
+      function goTo(i) {
+        const max = maxIndex();
+        if (i > max) i = 0;          // wrap to start
+        if (i < 0) i = max;          // wrap to end
+        index = i;
+        update();
+      }
+
+      const next = () => goTo(index + 1);
+      const prev = () => goTo(index - 1);
+
+      let hovered = false;
+      let focused = false;
+
+      function startAutoplay() {
+        if (prefersReducedMotion || timer || hovered || focused || document.hidden) return;
+        timer = setInterval(next, AUTOPLAY_MS);
+      }
+
+      function stopAutoplay() {
+        clearInterval(timer);
+        timer = null;
+      }
+
+      function restartAutoplay() {
+        stopAutoplay();
+        startAutoplay();
+      }
+
+      function setLayout() {
+        const newPerView = getPerView();
+        if (newPerView !== perView || !dotsWrap.children.length) {
+          perView = newPerView;
+          carousel.style.setProperty("--per-view", perView);
+          index = Math.min(index, maxIndex());
+          buildDots();
+        }
+        update();
+      }
+
+      prevBtn.addEventListener("click", () => { prev(); restartAutoplay(); });
+      nextBtn.addEventListener("click", () => { next(); restartAutoplay(); });
+
+      // Pause on hover / keyboard focus; announce slide changes only while paused by the user
+      carousel.addEventListener("mouseenter", () => { hovered = true; stopAutoplay(); });
+      carousel.addEventListener("mouseleave", () => { hovered = false; startAutoplay(); });
+      carousel.addEventListener("focusin", () => {
+        focused = true;
+        stopAutoplay();
+        track.setAttribute("aria-live", "polite");
+      });
+      carousel.addEventListener("focusout", (e) => {
+        if (!carousel.contains(e.relatedTarget)) {
+          focused = false;
+          track.setAttribute("aria-live", "off");
+          startAutoplay();
+        }
+      });
+
+      // Keyboard arrows when focus is inside the carousel
+      carousel.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") { prev(); e.preventDefault(); }
+        if (e.key === "ArrowRight") { next(); e.preventDefault(); }
+      });
+
+      // Touch swipe support
+      let touchStartX = 0;
+      let touchStartY = 0;
+      const SWIPE_THRESHOLD = 50;
+
+      track.addEventListener("touchstart", (e) => {
+        touchStartX = e.changedTouches[0].clientX;
+        touchStartY = e.changedTouches[0].clientY;
+        stopAutoplay();
+      }, { passive: true });
+
+      track.addEventListener("touchend", (e) => {
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+          dx < 0 ? next() : prev();
+        }
+        startAutoplay();
+      }, { passive: true });
+
+      // Recalculate layout on resize (debounced)
+      let resizeTimer;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(setLayout, 150);
+      });
+
+      // Pause when the tab is hidden
+      document.addEventListener("visibilitychange", () => {
+        document.hidden ? stopAutoplay() : startAutoplay();
+      });
+
+      setLayout();
+      startAutoplay();
+
+      /* =========================================================
+         5. ENQUIRY FORM VALIDATION & SUBMISSION
+         ========================================================= */
+      const form = document.getElementById("enquiry-form");
+      const submitBtn = document.getElementById("submit-btn");
+      const successBox = document.getElementById("form-success");
+      const successName = document.getElementById("success-name");
+
+      const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+      const PHONE_RE = /^\d{8,15}$/;
+
+      // Validation rules: each returns an error string, or "" when valid
+      const validators = {
+        fullName: (v) => {
+          if (!v.trim()) return "Please enter your full name.";
+          if (v.trim().length < 2) return "Name must be at least 2 characters.";
+          return "";
+        },
+        email: (v) => {
+          if (!v.trim()) return "Please enter your email address.";
+          if (!EMAIL_RE.test(v.trim())) return "Please enter a valid email address (e.g. name@example.com).";
+          return "";
+        },
+        phone: (v) => {
+          if (!v.trim()) return "Please enter your phone number.";
+          if (!/^\d+$/.test(v.trim())) return "Phone number must contain digits only.";
+          if (!PHONE_RE.test(v.trim())) return "Phone number must be between 8 and 15 digits.";
+          return "";
+        },
+        ageRange: (v) => (v ? "" : "Please select your age range."),
+        interest: (v) => (v ? "" : "Please select an area of interest."),
+        contactMethod: () =>
+          form.querySelector('input[name="contactMethod"]:checked') ? "" : "Please choose a preferred contact method.",
+        message: (v) => {
+          if (!v.trim()) return "Please enter a message.";
+          if (v.trim().length < 10) return "Message must be at least 10 characters.";
+          return "";
+        },
+        consent: () => (form.consent.checked ? "" : "You must agree to be contacted before submitting."),
+      };
+
+      // The element that receives the red border for each field
+      function getTarget(name) {
+        if (name === "contactMethod") return document.getElementById("contactMethod-group");
+        if (name === "consent") return document.getElementById("consent-label");
+        return form.elements[name];
+      }
+
+      function setFieldState(name, message) {
+        const target = getTarget(name);
+        const errorEl = document.getElementById(name + "-error");
+        target.classList.toggle("invalid", Boolean(message));
+        errorEl.textContent = message;
+
+        // aria-invalid goes on the actual inputs
+        const inputs = name === "contactMethod"
+          ? form.querySelectorAll('input[name="contactMethod"]')
+          : [form.elements[name]];
+        inputs.forEach((input) => input.setAttribute("aria-invalid", String(Boolean(message))));
+      }
+
+      function validateField(name) {
+        const field = form.elements[name];
+        const value = field && "value" in field ? field.value : "";
+        const message = validators[name](value);
+        setFieldState(name, message);
+        return !message;
+      }
+
+      // Live validation: on blur, and on input/change once a field has been touched
+      const touched = new Set();
+      Object.keys(validators).forEach((name) => {
+        const els = name === "contactMethod"
+          ? form.querySelectorAll('input[name="contactMethod"]')
+          : [form.elements[name]];
+
+        els.forEach((el) => {
+          el.addEventListener("blur", () => {
+            if (name !== "contactMethod" && name !== "consent") {
+              touched.add(name);
+              validateField(name);
+            }
+          });
+          el.addEventListener("input", () => { if (touched.has(name)) validateField(name); });
+          el.addEventListener("change", () => {
+            touched.add(name);
+            validateField(name);
+          });
+        });
+      });
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        let firstInvalid = null;
+        Object.keys(validators).forEach((name) => {
+          touched.add(name);
+          if (!validateField(name) && !firstInvalid) {
+            firstInvalid = name === "contactMethod"
+              ? form.querySelector('input[name="contactMethod"]')
+              : form.elements[name];
+          }
+        });
+
+        if (firstInvalid) {
+          firstInvalid.focus();
+          return;
+        }
+
+        // Collect form data into a plain object
+        const formData = new FormData(form);
+        const data = {
+          fullName: formData.get("fullName").trim(),
+          email: formData.get("email").trim(),
+          phone: formData.get("phone").trim(),
+          ageRange: formData.get("ageRange"),
+          interest: formData.get("interest"),
+          contactMethod: formData.get("contactMethod"),
+          message: formData.get("message").trim(),
+          consent: formData.get("consent") === "on",
+          submittedAt: new Date().toISOString(),
+        };
+
+        // Loading state
+        submitBtn.disabled = true;
+        submitBtn.classList.add("loading");
+        submitBtn.setAttribute("aria-busy", "true");
+        submitBtn.querySelector(".btn-label").textContent = "Sending…";
+
+        setTimeout(() => {
+          console.log(JSON.stringify(data, null, 2));
+
+          successName.textContent = data.fullName;
+          form.hidden = true;
+          successBox.hidden = false;
+          successBox.focus();
+        }, 1500);
+      });
+
+      /* =========================================================
+         6. NEWSLETTER SIGNUP
+         ========================================================= */
+      const newsletterForm = document.getElementById("newsletter-form");
+      const newsletterInput = document.getElementById("newsletter-email");
+      const newsletterMsg = document.getElementById("newsletter-msg");
+
+      newsletterForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const value = newsletterInput.value.trim();
+        let error = "";
+
+        if (!value) error = "Please enter your email address.";
+        else if (!EMAIL_RE.test(value)) error = "Please enter a valid email address.";
+
+        newsletterInput.classList.toggle("invalid", Boolean(error));
+        newsletterInput.setAttribute("aria-invalid", String(Boolean(error)));
+        newsletterMsg.className = "newsletter-msg " + (error ? "error" : "success");
+
+        if (error) {
+          newsletterMsg.textContent = error;
+          newsletterInput.focus();
+        } else {
+          newsletterMsg.textContent = "Thanks for subscribing! Check your inbox to confirm.";
+          newsletterForm.reset();
+        }
+      });
+
+      newsletterInput.addEventListener("input", () => {
+        if (newsletterInput.classList.contains("invalid") && EMAIL_RE.test(newsletterInput.value.trim())) {
+          newsletterInput.classList.remove("invalid");
+          newsletterInput.setAttribute("aria-invalid", "false");
+          newsletterMsg.textContent = "";
+        }
+      });
+
+      /* =========================================================
+         7. FOOTER YEAR
+         ========================================================= */
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      /* =========================================================
+         8. SCROLL HANDLERS (header shadow + back-to-top)
+         ========================================================= */
+      const backToTop = document.getElementById("back-to-top");
+
+      function onScroll() {
+        const y = window.scrollY;
+        header.classList.toggle("scrolled", y > 10);
+        backToTop.classList.toggle("show", y > 400);
+      }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      onScroll();
+
+      backToTop.addEventListener("click", () => {
+        window.scrollTo({ top: 0, behavior: prefersReducedMotion ? "auto" : "smooth" });
+      });
+    });
+  </script>
+</body>
+</html>
